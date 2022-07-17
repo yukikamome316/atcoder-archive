@@ -1,0 +1,64 @@
+/*
+ * Author: yukikamome316
+ * Submission URL: https://atcoder.jp/contests/abc260/submissions/33309308
+ * Submitted at: 2022-07-17 21:46:26
+ * Problem URL: https://atcoder.jp/contests/abc260/tasks/abc260_b
+ * Result: WA
+ * Execution Time: 7 ms
+ */
+
+#include <bits/stdc++.h>
+
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define repi(i, n, s) for (int i = s; i < n; i++)
+
+typedef long long ll;
+using namespace std;
+
+int main() {
+    int N, X, Y, Z;
+    cin >> N >> X >> Y >> Z;
+    vector<pair<int, int>> m_data(N);
+    vector<pair<int, int>> m_data_sorted(N);
+    vector<pair<int, int>> e_data(N);
+    vector<pair<int, int>> e_data_sorted(N);
+    rep(i, N) {
+        int A; cin >> A;
+        m_data[i] = {-A, i + 1};
+        m_data_sorted[i] = {-A, i + 1};
+    }
+    rep(i, N) {
+        int B; cin >> B;
+        e_data[i] = {-B, i + 1};
+        e_data_sorted[i] = {-B, i + 1};
+    }
+
+    sort(m_data_sorted.begin(), m_data_sorted.end());
+    sort(e_data_sorted.begin(), e_data_sorted.end());
+
+    vector<int> passed;
+    rep(i, X) {
+        passed.emplace_back(m_data_sorted[i].second);
+    }
+    rep(i, Y) {
+        if (find(passed.begin(), passed.end(), e_data_sorted[i].second) == passed.end()) {
+            passed.emplace_back(e_data_sorted[i].second);
+        }
+    }
+
+    vector<pair<int, int>> sum;
+    rep(i, N) {
+        if (find(passed.begin(), passed.end(), i + 1) == passed.end()) {
+            sum.emplace_back(pair<int, int>(m_data[i].first + e_data[i].first, i + 1));
+        }
+    }
+    sort(sum.begin(), sum.end());
+    rep(i, Z) {
+        passed.emplace_back(sum[i].second);
+    }
+
+    sort(passed.begin(), passed.end());
+    rep(i, passed.size()) {
+        cout << passed[i] << endl;
+    }
+}
