@@ -1,0 +1,26 @@
+/*
+ * Author: yukikamome316
+ * Submission URL: https://atcoder.jp/contests/abc018/submissions/41305036
+ * Submitted at: 2023-05-11 19:07:20
+ * Problem URL: https://atcoder.jp/contests/abc018/tasks/abc018_1
+ * Result: AC
+ * Execution Time: 7 ms
+ */
+
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)
+using namespace std;
+using ll = long long;
+
+int main() {
+    vector<int> data(3); rep(i, 3) cin >> data[i];
+
+    vector<int> sorted(data.begin(), data.end());
+    sort(sorted.begin(), sorted.end());
+
+    rep(i, 3) {
+        auto itr = find(sorted.begin(), sorted.end(), data[i]);
+        cout << 3 - distance(sorted.begin(), itr) << endl;
+    }
+}
