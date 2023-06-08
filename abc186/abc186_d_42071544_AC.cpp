@@ -1,0 +1,34 @@
+/*
+ * Author: yukikamome316
+ * Submission URL: https://atcoder.jp/contests/abc186/submissions/42071544
+ * Submitted at: 2023-06-08 14:23:02
+ * Problem URL: https://atcoder.jp/contests/abc186/tasks/abc186_d
+ * Result: AC
+ * Execution Time: 84 ms
+ */
+
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)
+using namespace std;
+using ll = long long;
+
+int main() {
+  int N;
+  cin >> N;
+  vector<ll> A(N);
+  rep(i, N) cin >> A[i];
+
+  sort(A.begin(), A.end());
+
+  ll sum = 0;
+  rep2(i, 1, N) {
+    sum += i * A[i];
+  }
+
+  rep(i, N - 1) {
+    sum -= (N - i - 1) * A[i];
+  }
+
+  cout << sum << endl;
+}
